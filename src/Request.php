@@ -3,6 +3,7 @@
 namespace ReallySimpleHttpRequests;
 
 use GuzzleHttp\Client;
+use Webmozart\Assert\Assert;
 
 class Request implements RequestInterface
 {
@@ -40,33 +41,61 @@ class Request implements RequestInterface
         $this->headers = $headers;
     }
 
+    /**
+     * @return ResponseInterface|null
+     */
     public function send()
     {
-        // TODO: Implement setUrl() method.
+        // TODO: Implement send() method.
     }
 
-    public function setUrl()
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
     {
-        // TODO: Implement setUrl() method.
+        Assert::string($url);
+        $this->url = $url;
     }
 
-    public function setMethod()
+    /**
+     * @param string $method
+     */
+    public function setMethod($method)
     {
-        // TODO: Implement setMethod() method.
+        Assert::string($method);
+        $method = strtolower($method);
+        Assert::oneOf($method, ['get', 'post', 'put', 'patch', 'delete']);
+        $this->method = $method;
     }
 
-    public function setBody()
+    /**
+     * @param string $body
+     */
+    public function setBody($body)
     {
-        // TODO: Implement setBody() method.
+        Assert::string($body);
+        $this->body = $body;
     }
 
-    public function addHeader()
+    /**
+     * @param string $key
+     * @param string $value
+     */
+    public function addHeader($key, $value)
     {
-        // TODO: Implement addHeader() method.
+        Assert::string($key);
+        Assert::string($value);
+        $this->headers[$key] = $value;
     }
 
-    public function removeHeader()
+    /**
+     * @param $key
+     */
+    public function removeHeader($key)
     {
-        // TODO: Implement removeHeader() method.
+        Assert::string($key);
+        Assert::keyExists($this->headers, $key);
+        unset($this->headers[$key]);
     }
 }

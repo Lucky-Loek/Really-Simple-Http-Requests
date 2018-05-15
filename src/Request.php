@@ -40,6 +40,7 @@ class Request implements RequestInterface
         $this->setMethod($method);
         $this->setBody($body);
 
+        Assert::isArray($headers);
         foreach ($headers as $key => $value) {
             $this->addHeader($key, $value);
         }

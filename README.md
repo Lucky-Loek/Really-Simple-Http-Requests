@@ -31,7 +31,7 @@ echo $response->getStatusCode();
 echo $response->getHeader('Content-Length');
 
 // Get them all!
-foreach $response->getAllHeaders as $header {
+foreach $response->getAllHeaders() as $header {
     echo $header;
 }
 ```

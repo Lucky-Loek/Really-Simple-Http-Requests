@@ -36,10 +36,13 @@ class Request implements RequestInterface
     public function __construct($url, $method, $body = null, $headers = [])
     {
         $this->client = new Client();
-        $this->url = $url;
-        $this->method = $method;
-        $this->body = $body;
-        $this->headers = $headers;
+        $this->setUrl($url);
+        $this->setMethod($method);
+        $this->setBody($body);
+
+        foreach ($headers as $key => $value) {
+            $this->addHeader($key, $value);
+        }
     }
 
     /**

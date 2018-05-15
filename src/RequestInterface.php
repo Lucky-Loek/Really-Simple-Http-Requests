@@ -5,15 +5,34 @@ namespace ReallySimpleHttpRequests;
 
 interface RequestInterface
 {
+    /**
+     * @return mixed
+     */
     public function send();
 
-    public function setUrl();
+    /**
+     * @param string $url
+     */
+    public function setUrl($url);
 
-    public function setMethod();
+    /**
+     * @param string $method
+     */
+    public function setMethod($method);
 
-    public function setBody();
+    /**
+     * @param string $body
+     */
+    public function setBody($body);
 
-    public function addHeader();
+    /**
+     * @param string $key
+     * @param string $value
+     */
+    public function addHeader($key, $value);
 
-    public function removeHeader();
+    /**
+     * @param $key
+     */
+    public function removeHeader($key);
 }

@@ -80,6 +80,14 @@ class Request implements RequestInterface
     }
 
     /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
      * @param string $method
      */
     public function setMethod($method)
@@ -91,12 +99,28 @@ class Request implements RequestInterface
     }
 
     /**
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
      * @param string $body
      */
     public function setBody($body)
     {
-        Assert::string($body);
+        Assert::nullOrString($body);
         $this->body = $body;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
     }
 
     /**
@@ -118,5 +142,20 @@ class Request implements RequestInterface
         Assert::string($key);
         Assert::keyExists($this->headers, $key);
         unset($this->headers[$key]);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllHeaders()
+    {
+        return $this->headers;
+    }
+
+    public function getHeader($key)
+    {
+        Assert::string($key);
+        Assert::keyExists($this->headers, $key);
+        return $this->headers[$key];
     }
 }

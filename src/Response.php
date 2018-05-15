@@ -3,30 +3,67 @@
 namespace ReallySimpleHttpRequests;
 
 
+use Webmozart\Assert\Assert;
+
 class Response implements ResponseInterface
 {
+    /**
+     * @var string
+     */
+    private $body;
 
-    public function __construct()
+    /**
+     * @var int
+     */
+    private $statusCode;
+
+    /**
+     * @var array
+     */
+    private $headers;
+
+    public function __construct($body, $statusCode, $headers)
     {
+        Assert::string($body);
+        Assert::numeric($statusCode);
+        Assert::isArray($headers);
+
+        $this->body = $body;
+        $this->statusCode = $statusCode;
+        $this->headers = $headers;
     }
 
+    /**
+     * @return int
+     */
     public function getStatusCode()
     {
-        // TODO: Implement getStatusCode() method.
+        return $this->statusCode;
     }
 
+    /**
+     * @return string
+     */
     public function getBody()
     {
-        // TODO: Implement getBody() method.
+        return $this->body;
     }
 
-    public function getHeader()
+    /**
+     * @return string
+     */
+    public function getHeader($header)
     {
-        // TODO: Implement getHeader() method.
+        Assert::string($header);
+        Assert::keyExists($this->headers, $header);
+        return $this->headers[$header];
     }
 
+    /**
+     * @return array
+     */
     public function getAllHeaders()
     {
-        // TODO: Implement getAllHeaders() method.
+        return $this->headers;
     }
 }

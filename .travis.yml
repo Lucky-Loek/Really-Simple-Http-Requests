@@ -9,4 +9,7 @@ before_script:
   - composer install --no-interaction
 
 script:
-  - vendor/bin/phpunit --bootstrap vendor/autoload.php --coverage-html coverage --whitelist src tests
+  - vendor/bin/phpunit --bootstrap vendor/autoload.php --coverage-clover=coverage.xml --whitelist src tests
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

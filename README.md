@@ -1,4 +1,4 @@
-# Really Simple HTTP Request
+# Really Simple HTTP Requests
 
 A framework-agnostic wrapper for really easy HTTP requests in PHP.
 

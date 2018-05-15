@@ -3,6 +3,7 @@
 namespace ReallySimpleHttpRequests;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Webmozart\Assert\Assert;
 
 class Request implements RequestInterface
@@ -42,11 +43,27 @@ class Request implements RequestInterface
     }
 
     /**
-     * @return ResponseInterface|null
+     * @return ResponseInterface
+     * @throws GuzzleException
      */
     public function send()
     {
-        // TODO: Implement send() method.
+        $reply = $this->client->request(
+            $this->method,
+            $this->url,
+            [
+                'body' => $this->body,
+                'headers' => $this->headers
+            ]
+        );
+
+        $response = new Response(
+            $reply->getBody()->getContents(),
+            $reply->getStatusCode(),
+            $reply->getHeaders()
+        );
+
+        return $response;
     }
 
     /**

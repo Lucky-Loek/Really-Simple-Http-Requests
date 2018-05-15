@@ -1,5 +1,9 @@
 # Really Simple HTTP Requests
 
+[![Build Status](https://travis-ci.com/loekiedepo/Really-Simple-Http-Requests.svg?branch=master)](https://travis-ci.com/loekiedepo/Really-Simple-Http-Requests) [![codecov](https://codecov.io/gh/loekiedepo/Really-Simple-Http-Requests/branch/master/graph/badge.svg)](https://codecov.io/gh/loekiedepo/Really-Simple-Http-Requests)
+
+
+
 A framework-agnostic wrapper for really easy HTTP requests in PHP.
 
 This is a package for people who want to easily send requests and expect a status code and body back. Nothing more, nothing less.

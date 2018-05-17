@@ -76,6 +76,26 @@ class RequestTest extends TestCase
     /**
      * @test
      */
+    public function itShouldGetUrl()
+    {
+        $request = new Request('www.example.org', 'GET');
+
+        $this->assertSame('www.example.org', $request->getUrl());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldGetNullBody()
+    {
+        $request = new Request('www.example.org', 'GET');
+
+        $this->assertNull($request->getBody());
+    }
+
+    /**
+     * @test
+     */
     public function itShouldRemoveValidHeader()
     {
         $headers = ['firstKey' => 'value', 'secondKey' => 'value'];

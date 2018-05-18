@@ -2,26 +2,26 @@
 
 namespace ReallySimpleHttpRequests;
 
-
 interface ResponseInterface
 {
     /**
      * @return int
      */
-    public function getStatusCode();
+    public function getStatusCode(): int;
 
     /**
      * @return string
      */
-    public function getBody();
+    public function getBody(): string;
 
     /**
-     * @return string
+     * @param string $key
+     * @return array|null
      */
-    public function getHeader($header);
+    public function getHeader(string $key): ?array;
 
     /**
      * @return array
      */
-    public function getAllHeaders();
+    public function getAllHeaders(): array;
 }

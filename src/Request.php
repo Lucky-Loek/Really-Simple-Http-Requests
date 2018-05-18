@@ -33,14 +33,13 @@ class Request implements RequestInterface
      */
     private $headers;
 
-    public function __construct($url, $method, $body = null, $headers = [])
+    public function __construct(string $url, string $method, ?string $body = null, array $headers = [])
     {
         $this->client = new Client();
         $this->setUrl($url);
         $this->setMethod($method);
         $this->setBody($body);
 
-        Assert::isArray($headers);
         foreach ($headers as $key => $value) {
             $this->addHeader($key, $value);
         }
@@ -73,16 +72,15 @@ class Request implements RequestInterface
     /**
      * @param string $url
      */
-    public function setUrl($url)
+    public function setUrl(string $url)
     {
-        Assert::string($url);
         $this->url = $url;
     }
 
     /**
      * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -90,9 +88,8 @@ class Request implements RequestInterface
     /**
      * @param string $method
      */
-    public function setMethod($method)
+    public function setMethod(string $method)
     {
-        Assert::string($method);
         $method = strtolower($method);
         Assert::oneOf($method, ['get', 'post', 'put', 'patch', 'delete']);
         $this->method = $method;
@@ -101,7 +98,7 @@ class Request implements RequestInterface
     /**
      * @return string
      */
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->method;
     }
@@ -109,16 +106,15 @@ class Request implements RequestInterface
     /**
      * @param string $body
      */
-    public function setBody($body)
+    public function setBody(?string $body)
     {
-        Assert::nullOrString($body);
         $this->body = $body;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBody()
+    public function getBody(): ?string
     {
         return $this->body;
     }
@@ -127,19 +123,16 @@ class Request implements RequestInterface
      * @param string $key
      * @param string $value
      */
-    public function addHeader($key, $value)
+    public function addHeader(string $key, string $value)
     {
-        Assert::string($key);
-        Assert::string($value);
         $this->headers[$key] = $value;
     }
 
     /**
      * @param $key
      */
-    public function removeHeader($key)
+    public function removeHeader(string $key)
     {
-        Assert::string($key);
         Assert::keyExists($this->headers, $key);
         unset($this->headers[$key]);
     }
@@ -147,15 +140,23 @@ class Request implements RequestInterface
     /**
      * @return array
      */
-    public function getAllHeaders()
+    public function getAllHeaders(): array
     {
         return $this->headers;
     }
 
-    public function getHeader($key)
+    /**
+     * @param string $key
+     * @return string|null
+     */
+    public function getHeader(string $key): ?string
     {
         Assert::string($key);
-        Assert::keyExists($this->headers, $key);
-        return $this->headers[$key];
+
+        if (array_key_exists($key, $this->headers)) {
+            return $this->headers[$key];
+        }
+
+        return null;
     }
 }

@@ -46,12 +46,10 @@ class Response implements ResponseInterface
 
     /**
      * @param string $key
-     * @return array|null
+     * @return string|null
      */
     public function getHeader(string $key): ?array
     {
-        Assert::string($key);
-
         if (array_key_exists($key, $this->headers)) {
             return $this->headers[$key];
         }

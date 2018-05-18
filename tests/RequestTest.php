@@ -5,7 +5,6 @@ namespace ReallySimpleHttpRequests\Test;
 use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
 use ReallySimpleHttpRequests\Request;
-use ReallySimpleHttpRequests\Response;
 
 class RequestTest extends TestCase
 {

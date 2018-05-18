@@ -9,16 +9,6 @@ use ReallySimpleHttpRequests\Response;
 
 class RequestTest extends TestCase
 {
-    const VALID_URL = 'www.example.org';
-    const INVALID_URL = 42;
-    const VALID_METHOD = 'post';
-    const INVALID_METHOD = 42;
-    const VALID_BODY = 'body';
-    const INVALID_BODY = 42;
-    const VALID_HEADERS = ['headerKey' => 'headerValue'];
-    const INVALID_HEADERS = 42;
-    const INVALID_HEADERS_BUT_ARRAY = [42 => 42];
-
     /**
      * @test
      */
@@ -32,45 +22,9 @@ class RequestTest extends TestCase
      * @test
      * @expectedException InvalidArgumentException
      */
-    public function itShouldThrowExceptionWhenInstantiatedWithInvalidUrl()
-    {
-        new Request(42, 'get');
-    }
-
-    /**
-     * @test
-     * @expectedException InvalidArgumentException
-     */
     public function itShouldThrowExceptionWhenInstantiatedWithInvalidMethod()
     {
         new Request('www.example.org', 42);
-    }
-
-    /**
-     * @test
-     * @expectedException InvalidArgumentException
-     */
-    public function itShouldThrowExceptionWhenInstantiatedWithInvalidBody()
-    {
-        new Request('www.example.org', 'post', 42);
-    }
-
-    /**
-     * @test
-     * @expectedException InvalidArgumentException
-     */
-    public function itShouldThrowExceptionWhenInstantiatedWithInvalidHeaders()
-    {
-        new Request('www.example.org', 'post', 'body', 42);
-    }
-
-    /**
-     * @test
-     * @expectedException InvalidArgumentException
-     */
-    public function itShouldThrowExceptionWhenInstantiatedWithInvalidHeadersButArray()
-    {
-        new Request('www.example.org', 'post', 'body', [42 => 42]);
     }
 
     /**

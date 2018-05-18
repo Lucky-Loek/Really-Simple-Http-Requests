@@ -40,11 +40,30 @@ class RequestTest extends TestCase
     /**
      * @test
      */
+    public function itShouldGetMethod()
+    {
+        $request = new Request('www.example.org', 'GET');
+
+        $this->assertSame('get' , $request->getMethod());
+    }
+
+    /**
+     * @test
+     */
     public function itShouldGetNullBody()
     {
         $request = new Request('www.example.org', 'GET');
 
         $this->assertNull($request->getBody());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldReturnBadHeaderAsNull()
+    {
+        $request = new Request('www.example.org', 'GET', null, ['key' => 'value']);
+        $this->assertNull($request->getHeader('nonExistent'));
     }
 
     /**
@@ -56,7 +75,7 @@ class RequestTest extends TestCase
         $request = new Request('www.example.org', 'post', 'body', $headers);
         $request->removeHeader('secondKey');
 
-        $this->assertEquals(['firstKey' => 'value'], $request->getAllHeaders());
+        $this->assertSame(['firstKey' => 'value'], $request->getAllHeaders());
     }
 
     /**
@@ -67,7 +86,7 @@ class RequestTest extends TestCase
         $headers = ['firstKey' => 'firstValue', 'secondKey' => 'secondValue'];
         $request = new Request('www.example.org', 'post', 'body', $headers);
 
-        $this->assertEquals('firstValue', $request->getHeader('firstKey'));
+        $this->assertSame('firstValue', $request->getHeader('firstKey'));
     }
 
     /**
@@ -94,9 +113,9 @@ class RequestTest extends TestCase
 
         $response = $request->send();
 
-        $this->assertEquals($body, $response->getBody());
-        $this->assertEquals($statusCode, $response->getStatusCode());
-        $this->assertEquals($responseHeaders, $response->getAllHeaders());
-        $this->assertEquals($responseHeaders['key'], $response->getHeader('key'));
+        $this->assertSame($body, $response->getBody());
+        $this->assertSame($statusCode, $response->getStatusCode());
+        $this->assertSame($responseHeaders, $response->getAllHeaders());
+        $this->assertSame($responseHeaders['key'], $response->getHeader('key'));
     }
 }

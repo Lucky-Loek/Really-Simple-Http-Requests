@@ -1,5 +1,5 @@
 {
-    "name": "loekiedepo/really-simple-http-requests",
+    "name": "lucky-loek/really-simple-http-requests",
     "description": "A package for people who want to easily send requests and expect a status code and body back.",
     "type": "library",
     "license": "MIT",

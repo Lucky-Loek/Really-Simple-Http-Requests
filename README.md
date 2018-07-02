@@ -8,6 +8,20 @@ A framework-agnostic wrapper for really easy HTTP requests in PHP.
 
 This is a package for people who want to easily send requests and expect a status code and body back. Nothing more, nothing less.
 
+## Installation
+
+```shell
+$ composer require lucky-loek/really-simple-http-requests
+```
+
+Or add to your `composer.json` file:
+
+```json
+"require": {
+    "lucky-loek/really-simple-http-requests": "^1.0"
+}
+```
+
 ## Usage
 
 ```php
